@@ -1,19 +1,85 @@
 ---
-title: "R Notebook"
+title: "An Analysis on the status of Visa Cases"
 output: pdf_document
 ---
 
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+Created By: Nirvan Silswal 
+NetID: ns318
+Email: nirvan.silswal@duke.edu
 
-Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+##Load Library Packages
 
 ```{r}
-plot(cars)
+library(tidyverse)
+library(readxl)
+VisaData <- read_excel("DIIG F20 Data Challenge #2.xlsx")
+
 ```
 
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+In this dataset we have data on 167,278 different visa applications each with 16 different attributes associated with the application. 
 
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file). 
+During this analysis I want to answer two major questions:
 
-The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+1. What variables makes an application more likely to get approved and what variables make an application less likely to get approved. 
+
+2. How do Job wages compare across locations?
+
+
+Lets look at question 1 first:
+
+
+
+```{r - Question1}
+
+```
+
+Now lets look at how we can answer question 2:
+
+To analyze wages lets first construct a plot of all the different jobs in the dataset
+
+```{r - Question 2}
+ggplot(data = VisaData, mapping = aes(x = JOB_TITLE_SUBGROUP)) + scale_x_discrete(guide=guide_axis(n.dodge=2)) +
+  geom_bar()
+```
+
+Now lets look at the locations where these visa applicants live:
+
+```{r}
+ggplot(data = VisaData, mapping = aes(x = WORK_STATE_ABBREVIATION)) + scale_x_discrete(guide=guide_axis(n.dodge=10)) +
+  geom_bar()
+
+```
+
+
+It's clear to see that the overwhelming majority of Visa-Applicants in this dataset are residing in California.
+This is important to note as California is a hub for software development jobs. Lets take a look at how many people who applied for a Visa in California also have a software related job.
+
+```{r}
+ggplot(data = VisaData, mapping = aes(x = (WORK_STATE = "California"), fill = JOB_TITLE_SUBGROUP)) + scale_x_discrete(guide=guide_axis(n.dodge=10)) +
+  geom_bar()
+```
+
+An overwhelming majority of the applicants from California are working some sort of software job. This is important to note as these software related jobs typically pay much more than say a teacher. 
+
+To further analyze this lets take a look at a Box plots of wages in each state
+
+```{r}
+ggplot(data = VisaData, mapping = aes(y = PAID_WAGE_PER_YEAR, x = WORK_STATE_ABBREVIATION)) +
+  scale_x_discrete(guide=guide_axis(n.dodge=10)) +
+  geom_boxplot()
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
