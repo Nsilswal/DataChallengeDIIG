@@ -1,5 +1,5 @@
 ---
-title: "An Analysis on the status of Visa Cases"
+title: "Analyzing Visa Applicant Demographics"
 output: pdf_document
 ---
 
@@ -15,7 +15,7 @@ library(readxl)
 VisaData <- read_excel("DIIG F20 Data Challenge #2.xlsx")
 
 ```
-, fig.height=5, fig.width=5
+
 
 
 In this dataset we have data on 167,278 different visa applications each with 16 different attributes associated with the application. 
@@ -39,6 +39,8 @@ To start off, we should look at where are applicants who get certified apply fro
   labs(y = "proportion")
 
 ```
+Certification Rate = the percentage of applicants who were Certified by the Visa office.
+
 While most states hover around and 80% Certification rate, it is interesting to note that the US territory of the Northern Marina Islands (MP) has a Certification rate of less than 50%. This is likely due to the fact that MP is a US territory and not a state - inticing Visa offices to approve less applicants from there.
 
 For the most part, for those applying from a US state, there is no significant difference between Visa certifiaciton rate between states.
@@ -53,8 +55,22 @@ ggplot(data = VisaData, mapping =
   labs(y = "proportion")
 
 ```
+Based on the data, there doesn't appear to be a signifcant difference regarding the occupation an applicant holds and their probability of being approved. All the jobs here seem to fluctuate between a 75% - 92% Certificaiton rate. It is worth noting that almost every job had a certificaiton rate of about 92% except for Asistant professors and attorney's - those were closer to the 75% Certification rate.
 
+Finally, we can take a look at how the Visa Class applied for influences the certification rate for an applicant.
 
+```{r}
+
+ggplot(data = VisaData, mapping = 
+      aes(x = (VISA_CLASS), fill = CASE_STATUS)) +   
+      geom_bar(position = "fill") + scale_x_discrete(guide=guide_axis(n.dodge=10))
+  labs(y = "proportion")
+
+```
+
+Here we can clearly see that applicants who applied for a Greencard were certified at a rate of about 60% - much lower than the other Visa Classes. Furthermore H-1B1 applicants from Singapore were approved at the highest Certification Rate - almost 90%.
+
+In summary: 
 
 Now lets look at how we can answer question 2:
 
@@ -84,12 +100,34 @@ ggplot(data = VisaData, mapping = aes(x = (WORK_STATE = "California"), fill = JO
 
 An overwhelming majority of the applicants from California are working some sort of software job. This is important to note as these software related jobs typically pay much more than say a teacher. 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 To further analyze this we should look at average wages in each state:
 
-```{r}
-ggplot(data = VisaData, mapping = aes(y = PAID_WAGE_PER_YEAR, x = WORK_STATE_ABBREVIATION)) +
-  scale_x_discrete(guide=guide_axis(n.dodge=10)) +
-  geom_boxplot()
+```{r, fig.height=5, fig.width=5}
+
+WageMean <- aggregate( PAID_WAGE_PER_YEAR ~ WORK_STATE, VisaData, mean )
+WageMean <- WageMean[order(WageMean$PAID_WAGE_PER_YEAR,decreasing=T),]
+WageMean
+
 ```
 
 
