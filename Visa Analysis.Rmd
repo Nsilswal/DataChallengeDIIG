@@ -15,6 +15,8 @@ library(readxl)
 VisaData <- read_excel("DIIG F20 Data Challenge #2.xlsx")
 
 ```
+, fig.height=5, fig.width=5
+
 
 In this dataset we have data on 167,278 different visa applications each with 16 different attributes associated with the application. 
 
@@ -27,11 +29,32 @@ During this analysis I want to answer two major questions:
 
 Lets look at question 1 first:
 
-
+To start off, we should look at where are applicants who get certified apply from, and where applicants who are denied apply from.
 
 ```{r - Question1}
+ 
+  ggplot(data = VisaData, mapping = 
+      aes(x = (WORK_STATE_ABBREVIATION), fill = CASE_STATUS)) +   
+      geom_bar(position = "fill") + scale_x_discrete(guide=guide_axis(n.dodge=10))
+  labs(y = "proportion")
 
 ```
+While most states hover around and 80% Certification rate, it is interesting to note that the US territory of the Northern Marina Islands (MP) has a Certification rate of less than 50%. This is likely due to the fact that MP is a US territory and not a state - inticing Visa offices to approve less applicants from there.
+
+For the most part, for those applying from a US state, there is no significant difference between Visa certifiaciton rate between states.
+
+It might be more beneficial to analyze certification rates based on the job an applicant has. Lets take a look at that now:
+
+```{r}
+
+ggplot(data = VisaData, mapping = 
+      aes(x = (JOB_TITLE_SUBGROUP), fill = CASE_STATUS)) +   
+      geom_bar(position = "fill") + scale_x_discrete(guide=guide_axis(n.dodge=10))
+  labs(y = "proportion")
+
+```
+
+
 
 Now lets look at how we can answer question 2:
 
@@ -61,7 +84,7 @@ ggplot(data = VisaData, mapping = aes(x = (WORK_STATE = "California"), fill = JO
 
 An overwhelming majority of the applicants from California are working some sort of software job. This is important to note as these software related jobs typically pay much more than say a teacher. 
 
-To further analyze this lets take a look at a Box plots of wages in each state
+To further analyze this we should look at average wages in each state:
 
 ```{r}
 ggplot(data = VisaData, mapping = aes(y = PAID_WAGE_PER_YEAR, x = WORK_STATE_ABBREVIATION)) +
