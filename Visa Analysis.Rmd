@@ -101,25 +101,6 @@ ggplot(data = VisaData, mapping = aes(x = (WORK_STATE = "California"), fill = JO
 An overwhelming majority of the applicants from California are working some sort of software job. This is important to note as these software related jobs typically pay much more than say a teacher. 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 To further analyze this we should look at average wages in each state:
 
 ```{r, fig.height=5, fig.width=5}
@@ -130,9 +111,28 @@ WageMean
 
 ```
 
+```{r}
+ggplot(data = VisaData, mapping = aes(x = (WORK_STATE = "West Virginia"), fill = JOB_TITLE_SUBGROUP)) + scale_x_discrete(guide=guide_axis(n.dodge=10)) +
+  geom_bar()
+
+ggplot(data = VisaData, mapping = aes(x = (WORK_STATE = "Washington"), fill = JOB_TITLE_SUBGROUP)) + scale_x_discrete(guide=guide_axis(n.dodge=10)) +
+  geom_bar()
+
+ggplot(data = VisaData, mapping = aes(x = (WORK_STATE = "New York"), fill = JOB_TITLE_SUBGROUP)) + scale_x_discrete(guide=guide_axis(n.dodge=10)) +
+  geom_bar()
+
+```
 
 
+The states with the 4 highest average salaries for Visa Applicants are West Virgina, California, Washington, and New York. California, Washington, and New York are all huge tech hubs with Silicon Valley, Seattle, and Manhatten all within their states. 
 
+
+```{r}
+
+ggplot(data = VisaData, mapping = aes(x = (WORK_STATE = "New Mexico"), fill = JOB_TITLE_SUBGROUP)) + scale_x_discrete(guide=guide_axis(n.dodge=10)) +
+  geom_bar()
+
+```
 
 
 
