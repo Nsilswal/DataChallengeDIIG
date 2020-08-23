@@ -18,11 +18,11 @@ VisaData <- read_excel("DIIG F20 Data Challenge #2.xlsx")
 
 
 
-In this dataset we have data on 167,278 different visa applications each with 16 different attributes associated with the application. 
+In this dataset we have data on 167,278 different Visa applications each with 16 different attributes associated with the application. 
 
 During this analysis I want to answer two major questions:
 
-1. What variables makes an application more likely to get approved and what variables make an application less likely to get approved. 
+1. What variables influence an application's likelihood of being approved?
 
 2. How do Job wages compare across locations?
 
@@ -39,11 +39,13 @@ To start off, we should look at where are applicants who get certified apply fro
   labs(y = "proportion")
 
 ```
-Certification Rate = the percentage of applicants who were Certified by the Visa office.
+Certification Rate = the percentage of applicants who were certified by the Visa office.
 
-While most states hover around and 80% Certification rate, it is interesting to note that the US territory of the Northern Marina Islands (MP) has a Certification rate of less than 50%. This is likely due to the fact that MP is a US territory and not a state - inticing Visa offices to approve less applicants from there.
+While most states hover around and 80% Certification rate, it is interesting to note that the US territory of the Northern Marina Islands (MP) has a Certification rate of less than 50%. This is likely due to the fact that MP is a US territory and not a state - inticing Visa offices to approve less applications from there.
 
-For the most part, for those applying from a US state, there is no significant difference between Visa certifiaciton rate between states.
+There is also data to suggest that applying from Wyoming or West Virginia also leads to a lower chance of being certified with a certification rate of around 55%.
+
+For the most part, for those applying from a US state, there is no significant difference between Visa certification rate between states.
 
 It might be more beneficial to analyze certification rates based on the job an applicant has. Lets take a look at that now:
 
@@ -55,9 +57,9 @@ ggplot(data = VisaData, mapping =
   labs(y = "proportion")
 
 ```
-Based on the data, there doesn't appear to be a signifcant difference regarding the occupation an applicant holds and their probability of being approved. All the jobs here seem to fluctuate between a 75% - 92% Certificaiton rate. It is worth noting that almost every job had a certificaiton rate of about 92% except for Asistant professors and attorney's - those were closer to the 75% Certification rate.
+Based on the data, there doesn't appear to be a signifcant difference regarding the occupation an applicant holds and their probability of being approved. All the jobs here seem to fluctuate between a 75% - 92% Certification rate. It is worth noting that almost every job had a certificaiton rate of about 92% except for Assistant professors and attorney's - those were closer to the 75% Certification rate.
 
-Finally, we can take a look at how the Visa Class applied for influences the certification rate for an applicant.
+Finally, we can take a look at how the Visa Class applied for influences the probability of being certified for an applicant.
 
 ```{r}
 
@@ -70,9 +72,9 @@ ggplot(data = VisaData, mapping =
 
 Here we can clearly see that applicants who applied for a Greencard were certified at a rate of about 60% - much lower than the other Visa Classes. Furthermore H-1B1 applicants from Singapore were approved at the highest Certification Rate - almost 90%.
 
-In summary: 
+In conclusion I analyzed three distinct variables to determine what had an influence on an applicant's ability to get certified: location, occupation, and the Visa class they applied for. After analyzing the data I found that the state from which an applicant applied for a Visa from didn't have much of an impact on their status, except if they were from the Northern Marina Islands, Wyoming, and West Virginia. Next I looked at the occupation that Visa applicants held when applying for a Visa. Applicants who were Assistant Professors and Attorneys were approved at a rate of about 75% while applicants who were Business Analysts, Data Analyst, Data Scientists, Mangement Consultants, Software Engineers, and Teachers were all approved at a Certification rate of about 90%. Finally, I analyzed the Visa Class an applicant applied for and found that Greencard applicants were approved at the lowest rate (about 60%). While H-1B1 applicants from Singapower were approved at rate of about 90% - the highest in the data set.
 
-Now lets look at how we can answer question 2:
+Now lets look at how we can answer question 2: How do Job wages compare across locations?
 
 To analyze wages lets first construct a plot of all the different jobs in the dataset
 
@@ -81,7 +83,7 @@ ggplot(data = VisaData, mapping = aes(x = JOB_TITLE_SUBGROUP)) + scale_x_discret
   geom_bar()
 ```
 
-Now lets look at the locations where these visa applicants live:
+Now lets look at the locations where these Visa applicants live:
 
 ```{r}
 ggplot(data = VisaData, mapping = aes(x = WORK_STATE_ABBREVIATION)) + scale_x_discrete(guide=guide_axis(n.dodge=10)) +
@@ -111,26 +113,14 @@ WageMean
 
 ```
 
-```{r}
-ggplot(data = VisaData, mapping = aes(x = (WORK_STATE = "West Virginia"), fill = JOB_TITLE_SUBGROUP)) + scale_x_discrete(guide=guide_axis(n.dodge=10)) +
-  geom_bar()
 
-ggplot(data = VisaData, mapping = aes(x = (WORK_STATE = "Washington"), fill = JOB_TITLE_SUBGROUP)) + scale_x_discrete(guide=guide_axis(n.dodge=10)) +
-  geom_bar()
+The states with the 4 highest average salaries for Visa Applicants are West Virginia, California, Washington, and New York. California, Washington, and New York are all huge tech hubs with Silicon Valley, Seattle, and Manhattan all within their states. While the states / territories at the bottom of the list aren't very well known for their tech presence (New Mexico, Puerto Rico, Virgin Islands, Guam, ect.)
 
-ggplot(data = VisaData, mapping = aes(x = (WORK_STATE = "New York"), fill = JOB_TITLE_SUBGROUP)) + scale_x_discrete(guide=guide_axis(n.dodge=10)) +
-  geom_bar()
-
-```
-
-
-The states with the 4 highest average salaries for Visa Applicants are West Virgina, California, Washington, and New York. California, Washington, and New York are all huge tech hubs with Silicon Valley, Seattle, and Manhatten all within their states. 
-
+It's also important to note that most of the workers who move to the United States for work are going to reside in the cities that offer the most employment oppurtunities to immigrants. Compare California to a state like New Mexico, California has a much larger economy and is at the heart of tech development - hence they provide more jobs to immigrants than New Mexico.
 
 ```{r}
 
-ggplot(data = VisaData, mapping = aes(x = (WORK_STATE = "New Mexico"), fill = JOB_TITLE_SUBGROUP)) + scale_x_discrete(guide=guide_axis(n.dodge=10)) +
-  geom_bar()
+
 
 ```
 
