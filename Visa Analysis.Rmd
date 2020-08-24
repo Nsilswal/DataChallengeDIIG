@@ -29,7 +29,7 @@ During this analysis I want to answer two major questions:
 
 Lets look at question 1 first:
 
-To start off, we should look at where are applicants who get certified apply from, and where applicants who are denied apply from.
+To start off, we should look at where are applicants who get certified apply from, and where applicants who get denied apply from.
 
 ```{r - Question1}
  
@@ -72,21 +72,23 @@ ggplot(data = VisaData, mapping =
 
 Here we can clearly see that applicants who applied for a Greencard were certified at a rate of about 60% - much lower than the other Visa Classes. Furthermore H-1B1 applicants from Singapore were approved at the highest Certification Rate - almost 90%.
 
-In conclusion I analyzed three distinct variables to determine what had an influence on an applicant's ability to get certified: location, occupation, and the Visa class they applied for. After analyzing the data I found that the state from which an applicant applied for a Visa from didn't have much of an impact on their status, except if they were from the Northern Marina Islands, Wyoming, and West Virginia. Next I looked at the occupation that Visa applicants held when applying for a Visa. Applicants who were Assistant Professors and Attorneys were approved at a rate of about 75% while applicants who were Business Analysts, Data Analyst, Data Scientists, Management Consultants, Software Engineers, and Teachers were all approved at a Certification rate of about 90%. Finally, I analyzed the Visa Class an applicant applied for and found that Greencard applicants were approved at the lowest rate (about 60%). While H-1B1 applicants from Singapower were approved at rate of about 90% - the highest in the data set.
+In conclusion I inspected three distinct variables to determine what had an influence on an applicant's ability to get certified: location, occupation, and the Visa class they applied for. After analyzing the data I found that the state from which an applicant applied for a Visa from didn't have much of an impact on their status, except if they were from the Northern Marina Islands, Wyoming, and West Virginia. Next I looked at the occupation that Visa applicants held when applying for a Visa. Applicants who were Assistant Professors and Attorneys were approved at a rate of about 75% while applicants who were Business Analysts, Data Analyst, Data Scientists, Management Consultants, Software Engineers, and Teachers were all approved at a Certification rate of about 90%. Finally, I analyzed the Visa Class an applicant applied for and found that Greencard applicants were approved at the lowest rate (about 60%). While H-1B1 applicants from Singapower were approved at rate of about 90% - the highest in the data set.
 
 Now lets look at how we can answer question 2: How do Job wages compare across locations?
 
 To analyze wages lets first construct a plot of all the different jobs in the dataset
 
 ```{r - Question 2}
-ggplot(data = VisaData, mapping = aes(x = JOB_TITLE_SUBGROUP)) + scale_x_discrete(guide=guide_axis(n.dodge=2)) +
+ggplot(data = VisaData, mapping = aes(x = JOB_TITLE_SUBGROUP)) + 
+  scale_x_discrete(guide=guide_axis(n.dodge=2)) +
   geom_bar()
 ```
 
-Now lets look at the locations where these Visa applicants live:
+Now we will look at the locations where these Visa applicants live:
 
 ```{r}
-ggplot(data = VisaData, mapping = aes(x = WORK_STATE_ABBREVIATION)) + scale_x_discrete(guide=guide_axis(n.dodge=10)) +
+ggplot(data = VisaData, mapping = aes(x = WORK_STATE_ABBREVIATION)) + 
+  scale_x_discrete(guide=guide_axis(n.dodge=10)) +
   geom_bar()
 
 ```
@@ -118,9 +120,7 @@ The states with the 4 highest average salaries for Visa Applicants are West Virg
 
 It's also important to note that most of the workers who move to the United States for work are going to reside in the cities that offer the most employment oppurtunities to immigrants. Compare California to a state like New Mexico, California has a much larger economy and is at the heart of tech development - hence they provide more software jobs to immigrants than New Mexico, increasing the average salary for the state.
 
-In summary, wages across states very significantly - following a trend where states with tech hubs tend to have higher average salaries than non tech hub states. 
-
-It's also important to note that the data might be slightly skewed as a very large portion of the data comes from California - while this is likely because lots of immigrants who apply for Visas are from California, its important to distinguish that this dataset isn't fully representative of all immigrants who apply for Visas.
+In summary, wages across states very significantly - following a trend where states with tech hubs tend to have higher average salaries than non tech hub states. It's also important to note that the data might be slightly skewed as a very large portion of the data comes from California - while this is likely because lots of immigrants who apply for Visas are from California, its important to distinguish that this dataset isn't fully representative of all immigrants who apply for Visas.
 
 ```{r}
 
