@@ -57,7 +57,7 @@ ggplot(data = VisaData, mapping =
   labs(y = "proportion")
 
 ```
-Based on the data, there doesn't appear to be a signifcant difference regarding the occupation an applicant holds and their probability of being approved. All the jobs here seem to fluctuate between a 75% - 92% Certification rate. It is worth noting that almost every job had a certificaiton rate of about 92% except for Assistant professors and attorney's - those were closer to the 75% Certification rate.
+Based on the data, there doesn't appear to be a signifcant difference regarding the occupation an applicant holds and their probability of being approved. All the jobs here seem to fluctuate between a 75% - 92% Certification rate. It is worth noting that almost every job had a certificaiton rate of about 92% except for Assistant professors, Attorneys, and Teacher's - those were closer to the 75% Certification rate.
 
 Finally, we can take a look at how the Visa Class applied for influences the probability of being certified for an applicant.
 
@@ -72,7 +72,7 @@ ggplot(data = VisaData, mapping =
 
 Here we can clearly see that applicants who applied for a Greencard were certified at a rate of about 60% - much lower than the other Visa Classes. Furthermore H-1B1 applicants from Singapore were approved at the highest Certification Rate - almost 90%.
 
-In conclusion I inspected three distinct variables to determine what had an influence on an applicant's ability to get certified: location, occupation, and the Visa class they applied for. After analyzing the data I found that the state from which an applicant applied for a Visa from didn't have much of an impact on their status, except if they were from the Northern Marina Islands, Wyoming, and West Virginia. Next I looked at the occupation that Visa applicants held when applying for a Visa. Applicants who were Assistant Professors and Attorneys were approved at a rate of about 75% while applicants who were Business Analysts, Data Analyst, Data Scientists, Management Consultants, Software Engineers, and Teachers were all approved at a Certification rate of about 90%. Finally, I analyzed the Visa Class an applicant applied for and found that Greencard applicants were approved at the lowest rate (about 60%). While H-1B1 applicants from Singapower were approved at rate of about 90% - the highest in the data set.
+In conclusion I inspected three distinct variables to determine what had an influence on an applicant's ability to get certified: location, occupation, and the Visa class they applied for. After analyzing the data I found that the state from which an applicant applied for a Visa from didn't have much of an impact on their status, except if they were from the Northern Marina Islands, Wyoming, and West Virginia. Next I looked at the occupation that Visa applicants held when applying for a Visa. Applicants who were Assistant Professors, Attorneys, and Teachers were approved at a rate of about 75% while applicants who were Business Analysts, Data Analyst, Data Scientists, Management Consultants, Software Engineers, and Teachers were all approved at a Certification rate of about 90%. Finally, I analyzed the Visa Class an applicant applied for and found that Greencard applicants were approved at the lowest rate (about 60%). While H-1B1 applicants from Singapower were approved at rate of about 90% - the highest in the data set.
 
 Now lets look at how we can answer question 2: How do Job wages compare across locations?
 
